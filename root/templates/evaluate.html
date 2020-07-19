@@ -1,0 +1,68 @@
+{% extends 'index.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style type="text/css">
+  body {
+    background-image: none;
+  }
+
+  #progress-bar {
+    margin-top: 1em;
+  }
+</style>
+{% if messages %}
+<div id="message_container">
+
+  {% for message in messages %}
+  <p style="color: orange">{{ message }}</p>
+  {% endfor %}
+  <hr>
+</div>
+{% endif %}
+
+{% autoescape off %}
+  {{ Radiomics_Study }}
+{% endautoescape %}
+<div class='progress-wrapper'>
+  <div id='progress-bar' class='progress-bar' style="background-color: #68a9ef; width: 0%;">&nbsp;</div>
+</div>
+<div id="progress-bar-message">Waiting for progress to start...</div>
+<div id="celery-result"></div>
+<br>
+<a id="download" style="display: none" download href="{% url 'download_features' radiomics_study_id %}">Download features</a>
+
+{% endblock %}
+
+{% block javascript %}
+
+<script>
+
+   var progressUrl = "{% url 'celery_progress:task_status' task_id %}";
+
+   function onError(progressBarElement, progressBarMessageElement, excMessage) {
+       progressBarElement.style.backgroundColor = '#dc4f63';
+       progressBarMessageElement.innerHTML = "Uh-Oh, something went wrong! " + excMessage;
+       var message_elem = document.getElementById("message_container");
+       message_elem.style.display = "none";
+   }
+
+   function customResult(resultElement, result) {
+
+           if (result==10){
+             var message_elem = document.getElementById("message_container");
+             message_elem.style.display = "none";
+             var download_elem = document.getElementById("download");
+             download_elem.style.display = "inline";
+           }
+         }
+
+         CeleryProgressBar.initProgressBar(progressUrl, {
+               onResult: customResult,
+               onError: onError,
+         })
+
+</script>
+
+{% endblock %}

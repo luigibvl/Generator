@@ -1,0 +1,36 @@
+{% extends 'index.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<style type="text/css">
+
+  body {
+    background-image: none;
+  }
+
+</style>
+
+  <div class="row justify-content-center">
+    <div class="col-5">
+      <div class="card">
+        <div class="card-body">
+          <h2>Delete account</h2>
+          <form method="post">
+            <p class="text">Please type your username to confirm.</p>
+            {% csrf_token %}
+            {{ form|crispy }}
+
+            {% if form.username.data is empty %}
+            {% elif form.username.data != user.username %}
+            <p class="text-danger">Incorrect username.</p>
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary">Delete account</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<style type="text/css">
+  body {
+    background-image: none;
+  }
+</style>
+
+
+{% if messages %}
+<div id="message_container">
+  {% for message in messages %}
+  {% if message.tags == 'info'%}
+  <p style="color: orange" id="message_info">{{ message }}</p>
+  {% elif message.tags == 'success'%}
+  <script>
+    var message = document.getElementById("message_info");
+    message.style.display = "none";
+  </script>
+  <p style="color: green" id="message_success">{{ message }}</p>
+  {% endif %}
+  {% endfor %}
+  <hr>
+</div>
+{% endif %}
+
+<form method="post" id="form" enctype="multipart/form-data">
+  {% csrf_token %}
+  <!-- {{ form|crispy }} -->
+  <div class="form-row">
+   <div class="form-group col-md-6 mb-0">
+     {{ form.study_name|as_crispy_field }}
+   </div>
+   <div class="form-group col-md-6 mb-0">
+     {{ form.study_description|as_crispy_field }}
+   </div>
+   <div class="form-group col-md-3 mb-0">
+     {{ form.features_family|as_crispy_field }}
+   </div>
+   <div class="form-group col-md-5 mb-0">
+     {{ form.ROI_name|as_crispy_field }}
+   </div>
+   <div class="form-group col-md-4 mb-0">
+     {{ form.imaging_type|as_crispy_field }}
+   </div>
+ </div>
+ <br>
+ <div class="form-row">
+   <div class="form-group col-md-3 mb-0">
+     {{ form.file_field|as_crispy_field }}
+   </div>
+ </div>
+ <br>
+  <button type="submit" class="btn btn-primary" id="uploadBtn">Submit</button>
+</form>
+
+{% endblock %}
+
+
+{% block javascript %}
+
+<script>
+  $(document).ready(function() {
+    var message_container = document.getElementById("message_container");
+    setTimeout(function() {
+      message_container.style.display = "none";
+    }, 4000);
+  });
+</script>
+
+
+{% endblock %}
