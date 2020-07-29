@@ -1,5 +1,4 @@
 
-
 def df_to_html(df):
     cell_properties = [('font-size', '10pt')]
     styles = [dict(selector='td', props=[('max-width', '100px')]),

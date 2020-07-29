@@ -5,7 +5,7 @@ from django.forms import ModelForm
 
 class Radiomics_Study_Form(ModelForm):
     file_field = forms.FileField(label="Choose study images in .zip", widget=forms.ClearableFileInput(
-        attrs={'multiple': False, 'webkitdirectory': False, 'directory': False}))
+        attrs={'multiple': False, 'webkitdirectory': False, 'directory': False, 'accept': '.zip'}))
 
     class Meta:
         model = Radiomics_Study

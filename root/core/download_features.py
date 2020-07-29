@@ -1,9 +1,7 @@
 from django.http import HttpResponse
-from django.contrib.auth.decorators import login_required
 from .models import Features_Model
 
 
-@login_required
 def download_features(request, radiomics_study_id):
 
     download_file = get_csv_file(radiomics_study_id)

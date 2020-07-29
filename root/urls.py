@@ -38,4 +38,4 @@ urlpatterns = [
     path('reset_filters/', core_filtering_views.reset_filters, name='reset_filters'),
     path('study_filter_by_features_family/', core_filtering_views.study_filter_by_features_family, name='study_filter_by_features_family'),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) 

@@ -38,21 +38,21 @@ class Radiomics_Study(models.Model):
 
     study_id = models.AutoField(primary_key=True)
     study_name = models.CharField(max_length=100)
-    study_creator = models.CharField(max_length=100)
-    study_description = models.CharField(max_length=1000)
+    study_creator = models.CharField(max_length=100,null=True)
+    study_description = models.CharField(max_length=1000, null=True)
     imaging_type = models.CharField(
         max_length=6, choices=IMAGING_TYPE_CHOISES, default='mri t1')
     creation_date = models.DateTimeField(
         default=datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-    ROI_name = models.CharField(max_length=100)
+    ROI_name = models.CharField(max_length=100, null=True)
     features_family = MultiSelectField(
         max_length=23, choices=FEATURES_FAMILY_CHOISES, default=('stat', 'morph', 'glcm', 'rlm', 'szm'), max_choices=5)
     num_patients = models.IntegerField(default=-1)
-    images_path = models.CharField(max_length=100)
-    images_file_name = models.CharField(max_length=100)
-    eval_features = models.CharField(max_length=100)
+    images_path = models.CharField(max_length=100,null=True)
+    images_file_name = models.CharField(max_length=100,null=True)
+    eval_features = models.CharField(max_length=100, null=True)
     download_features = models.CharField(max_length=17, default='download_features')
-    delete_study = models.CharField(max_length=12)
+    delete_study = models.CharField(max_length=12, null=True)
 
 
     def __str__(self):

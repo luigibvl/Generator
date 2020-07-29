@@ -10,7 +10,7 @@
 
   <style type="text/css">
 
-    .asteriskField {
+    /* .asteriskField {
       display: none;
     }
 
@@ -21,7 +21,7 @@
     form .alert ul {
       padding: 0;
       margin: 0;
-    }
+    } */
 
     body {
       background-image: url("{% static '/images/home_image.jpeg' %}");
@@ -51,7 +51,7 @@
               <a class="nav-link" href="{% url 'create_study' %}">Create new Study</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'all_studies' %}">See Studies</a>
+              <a class="nav-link" href="{% url 'all_studies' %}">All Studies</a>
             </li>
           {% endif %}
         </ul>
@@ -89,7 +89,7 @@
     {% endblock %}
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="{% static 'celery_progress/celery_progress.js' %}"></script>
+  <script src="{% static '/celery_progress/celery_progress.js' %}"></script>
 
   {% block javascript %}
   {% endblock %}

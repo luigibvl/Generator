@@ -21,6 +21,12 @@
     message.style.display = "none";
   </script>
   <p style="color: green" id="message_success">{{ message }}</p>
+  {% elif message.tags == 'error'%}
+  <script>
+    var message = document.getElementById("message_info");
+    message.style.display = "none";
+  </script>
+  <p style="color: red" id="message_error">{{ message }}</p>
   {% endif %}
   {% endfor %}
   <hr>
